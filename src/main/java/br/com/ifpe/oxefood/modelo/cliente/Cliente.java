@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @Entity // transforma numa classe exisitivel no jpa
 @Table(name = "Cliente") // especifica que a classe sera convertida em tabela
-@SQLRestriction("habilitado = true") // acresenta em todas as consultas uma clausula where: where habilidado = true 
+@SQLRestriction("habilitado = true") // acresenta em todas as consultas uma clausula where: where habilidado = true
 
 @Builder // forma de instanciar objetos da classe
 @Getter
