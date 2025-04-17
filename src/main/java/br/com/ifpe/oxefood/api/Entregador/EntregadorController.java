@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.oxefood.modelo.;
-import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
+import br.com.ifpe.oxefood.modelo.entregador.Entregador;
+import br.com.ifpe.oxefood.modelo.entregador.EntregadorService;
 
 @RestController
-@RequestMapping("/api/produto") // mapeamento por rotas
+@RequestMapping("/api/entregador") // mapeamento por rotas
 @CrossOrigin
 
 public class EntregadorController {
@@ -21,7 +21,7 @@ public class EntregadorController {
   private EntregadorService entregadorService;
 
   @PostMapping
-  public ResponseEntity<Produto> save(@RequestBody EntregadorRequest request) {
+  public ResponseEntity<Entregador> save(@RequestBody EntregadorRequest request) {
 
     Entregador entregador = entregadorService.save(request.build());
     return new ResponseEntity<Entregador>(entregador, HttpStatus.CREATED);

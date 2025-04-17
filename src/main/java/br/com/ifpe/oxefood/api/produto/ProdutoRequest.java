@@ -30,6 +30,7 @@ public class ProdutoRequest { // vai converter num objeto que tenha os atributos
         .codigo(codigo)
         .titulo(titulo)
         .descricao(descricao)
+        .valorUnitario(valorUnitario)
         .tempoEntregaMinimo(tempoEntregaMinimo)
         .tempoEntregaMaximo(tempoEntregaMaximo)
         .build();
