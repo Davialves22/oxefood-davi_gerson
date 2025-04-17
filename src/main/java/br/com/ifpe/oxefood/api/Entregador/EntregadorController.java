@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.oxefood.modelo.Produto.Produto;
+import br.com.ifpe.oxefood.modelo.;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
 
 @RestController
@@ -18,13 +18,13 @@ import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
 
 public class EntregadorController {
   @Autowired
-  private ProdutoService produtoService;
+  private EntregadorService entregadorService;
 
   @PostMapping
   public ResponseEntity<Produto> save(@RequestBody EntregadorRequest request) {
 
-    Produto produto = produtoService.save(request.build());
-    return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+    Entregador entregador = entregadorService.save(request.build());
+    return new ResponseEntity<Entregador>(entregador, HttpStatus.CREATED);
   }
 
 }

@@ -1,6 +1,11 @@
 package br.com.ifpe.oxefood.api.produto;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
+import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,26 +17,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EntregadorRequest { // vai converter num objeto que tenha os atributos
 
-  private String codigo;
+  private String nome;
 
-  private String titulo;
+  @JsonFormat(pattern = "dd/MM/yyyy")
+  private LocalDate dataNascimento;
 
-  private String descricao;
+  private String cpf;
 
-  private Double valorUnitario;
+  private String foneCelular;
 
-  private Integer tempoEntregaMinimo;
+  private String foneFixo;
 
-  private Integer tempoEntregaMaximo;
+  public Cliente build() {
 
-  public Produto build() {
-
-    return Produto.builder()
-        .codigo(codigo)
-        .titulo(titulo)
-        .descricao(descricao)
-        .tempoEntregaMinimo(tempoEntregaMinimo)
-        .tempoEntregaMaximo(tempoEntregaMaximo)
+    return Cliente.builder()
+        .nome(nome)
+        .dataNascimento(dataNascimento)
+        .cpf(cpf)
+        .foneCelular(foneCelular)
+        .foneFixo(foneFixo)
         .build();
   }
 
