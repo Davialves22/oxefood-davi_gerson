@@ -1,4 +1,4 @@
-package br.com.ifpe.oxefood.api.produto;
+package br.com.ifpe.oxefood.api.Entregador;
 
 import java.time.LocalDate;
 
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,26 @@ public class EntregadorRequest { // vai converter num objeto que tenha os atribu
 
   private String foneFixo;
 
+  private Integer qtdEntregasRealizadas;
+
+  private Double valorFrete;
+
+  private String enderecoRua;
+
+  private String enderecoComplemento;
+
+  private String enderecoNumero;
+
+  private String enderecoBairro;
+
+  private String enderecoCidade;
+
+  private String enderecoCep;
+
+  private String enderecoUf;
+
+  private Boolean ativo;
+
   public Cliente build() {
 
     return Cliente.builder()
@@ -36,7 +57,17 @@ public class EntregadorRequest { // vai converter num objeto que tenha os atribu
         .cpf(cpf)
         .foneCelular(foneCelular)
         .foneFixo(foneFixo)
-        .build();
+        .qtdEntregasRealizadas(qtdEntregasRealizadas)
+        .valorFrete(valorFrete)
+        .enderecoRua()
+        .enderecoComplemento()
+        .enderecoNumero()
+        .enderecoBairro()
+        .enderecoCidade()
+        .enderecoCep()
+        .enderecoUf()
+        .ativo()
+        .build()
   }
 
 }
