@@ -13,7 +13,7 @@ import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import br.com.ifpe.oxefood.modelo.cliente.ClienteService;
 
 @RestController
-@RequestMapping("/api/cliente")//mapeamento por rotas
+@RequestMapping("/api/cliente") // mapeamento por rotas
 @CrossOrigin
 
 public class ClienteController {
