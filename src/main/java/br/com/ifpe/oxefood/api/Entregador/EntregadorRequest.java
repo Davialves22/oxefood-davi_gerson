@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class EntregadorRequest { // vai converter num objeto que tenha os atribu
   private LocalDate dataNascimento;
 
   private String cpf;
+
+  private String rg;
 
   private String foneCelular;
 
@@ -53,6 +56,7 @@ public class EntregadorRequest { // vai converter num objeto que tenha os atribu
         .nome(nome)
         .dataNascimento(dataNascimento)
         .cpf(cpf)
+        .rg(rg)
         .foneCelular(foneCelular)
         .foneFixo(foneFixo)
         .qtdEntregasRealizadas(qtdEntregasRealizadas)
