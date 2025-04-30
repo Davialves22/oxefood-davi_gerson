@@ -34,7 +34,7 @@ public class ClienteService {
   public void update(Long id, Cliente clienteAlterado) {
 
     Cliente cliente = repository.findById(id).get();
-    
+
     cliente.setNome(clienteAlterado.getNome());
     cliente.setDataNascimento(clienteAlterado.getDataNascimento());
     cliente.setCpf(clienteAlterado.getCpf());
