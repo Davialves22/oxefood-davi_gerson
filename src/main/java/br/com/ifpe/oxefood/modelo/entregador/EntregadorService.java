@@ -14,10 +14,10 @@ public class EntregadorService {
   private EntregadorRepository repository;
 
   @Transactional // escopo de transação no banco de dados
-  public Entregador save(Entregador cliente) {
+  public Entregador save(Entregador entregador) {
 
-    cliente.setHabilitado(Boolean.TRUE);
-    return repository.save(cliente);
+    entregador.setHabilitado(Boolean.TRUE);
+    return repository.save(entregador);
   }
 
   public List<Entregador> listarTodos() {
@@ -28,6 +28,46 @@ public class EntregadorService {
   public Entregador obterPorID(Long id) {
 
     return repository.findById(id).get();
+  }
+
+  @Transactional
+  public void update(Long id, Entregador entregadorAlterado) {
+
+    Entregador entregador = repository.findById(id).get();
+
+    entregador.setNome(entregadorAlterado.getNome());
+
+    entregador.setCpf(entregadorAlterado.getCpf());
+
+    entregador.setRg(entregadorAlterado.getRg());
+
+    entregador.setDataNascimento(entregadorAlterado.getDataNascimento());
+
+    entregador.setFoneCelular(entregadorAlterado.getFoneCelular());
+
+    entregador.setFoneFixo(entregadorAlterado.getFoneFixo());
+
+    entregador.setQtdEntregasRealizadas(entregadorAlterado.getQtdEntregasRealizadas());
+
+    entregador.setValorFrete(entregadorAlterado.getValorFrete());
+
+    entregador.setEnderecoRua(entregadorAlterado.getEnderecoRua());
+
+    entregador.setEnderecoNumero(entregadorAlterado.getEnderecoNumero());
+
+    entregador.setEnderecoBairro(entregadorAlterado.getEnderecoBairro());
+
+    entregador.setEnderecoCidade(entregadorAlterado.getEnderecoCidade());
+
+    entregador.setEnderecoCep(entregadorAlterado.getEnderecoCep());
+
+    entregador.setEnderecoUf(entregadorAlterado.getEnderecoUf());
+
+    entregador.setEnderecoComplemento(entregadorAlterado.getEnderecoBairro());
+
+    entregador.setAtivo(entregadorAlterado.getAtivo());
+
+    repository.save(entregador);
   }
 
 }
