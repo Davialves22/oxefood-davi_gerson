@@ -18,12 +18,12 @@ public class EntregadorRequest { // vai converter num objeto que tenha os atribu
 
   private String nome;
 
-  @JsonFormat(pattern = "dd/MM/yyyy")
-  private LocalDate dataNascimento;
-
   private String cpf;
 
   private String rg;
+
+  @JsonFormat(pattern = "dd/MM/yyyy")
+  private LocalDate dataNascimento;
 
   private String foneCelular;
 
