@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProdutoRequest { // vai converter num objeto que tenha os atributos
 
+  private Long idCategoria;
+
   private String codigo;
 
   private String titulo;
