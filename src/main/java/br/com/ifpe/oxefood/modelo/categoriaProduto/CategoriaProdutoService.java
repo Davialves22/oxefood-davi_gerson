@@ -23,7 +23,7 @@ public class CategoriaProdutoService {
     }
 
     public CategoriaProduto obterPorID(Long id) {
-        return categoriaProdutoRepository.findById(id).get();
+        return categoriaProdutoRepository.findById(id).orElse(null);
     }
 
     @Transactional
