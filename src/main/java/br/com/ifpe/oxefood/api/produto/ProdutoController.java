@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ifpe.oxefood.modelo.Produto.CategoriaProdutoService;
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
-import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProdutoService;
 
 @RestController
 @RequestMapping("/api/produto") // mapeamento por rotas
