@@ -2,6 +2,7 @@ package br.com.ifpe.oxefood.modelo.Produto;
 
 import java.util.List;
 
+import br.com.ifpe.oxefood.util.exception.ProdutoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,11 @@ public class ProdutoService {
 
   @Transactional // escopo de transação no banco de dados
   public Produto save(Produto produto) {
+
+    if (produto.getValorUnitario() < 10) {
+      throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
+    }
+
 
     produto.setHabilitado(Boolean.TRUE);
     return repository.save(produto);
