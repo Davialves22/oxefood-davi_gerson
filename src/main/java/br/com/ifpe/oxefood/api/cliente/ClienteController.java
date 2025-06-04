@@ -2,6 +2,7 @@ package br.com.ifpe.oxefood.api.cliente;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class ClienteController {
 
   // função salvar
   @PostMapping
-  public ResponseEntity<Cliente> save(@RequestBody ClienteRequest request) {
+  public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
 
     Cliente cliente = clienteService.save(request.build());
     return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
@@ -45,7 +46,7 @@ public class ClienteController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Cliente> update(@PathVariable("id") Long id, @RequestBody ClienteRequest request) {
+  public ResponseEntity<Cliente> update(@PathVariable("id") Long id, @RequestBody @Valid ClienteRequest request) {
 
     clienteService.update(id, request.build());
     return ResponseEntity.ok().build();

@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @Entity // transforma numa classe exisitivel no jpa
 @Table(name = "Cliente") // especifica que a classe sera convertida em tabela
-@SQLRestriction("habilitado = true") // acresenta em todas as consultas uma clausula where: where habilidado = true
+@SQLRestriction("habilitado = true") // acresenta em todas as consultas uma cláusula where: where habilidado = true
 
 @Builder // forma de instanciar objetos da classe
 @Getter
@@ -25,13 +25,13 @@ import lombok.Setter;
 
 public class Cliente extends EntidadeAuditavel {
 
-  @Column
+  @Column(nullable = false, length = 100)
   private String nome;
 
   @Column
   private LocalDate dataNascimento;
 
-  @Column
+  @Column(unique = true)
   private String cpf;
 
   @Column
