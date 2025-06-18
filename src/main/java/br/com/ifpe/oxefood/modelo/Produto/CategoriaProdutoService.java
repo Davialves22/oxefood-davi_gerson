@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CategoriaProdutoService {
+
     @Autowired
     private CategoriaProdutoRepository categoriaProdutoRepository;
 

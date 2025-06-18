@@ -24,45 +24,46 @@ import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
 @CrossOrigin
 
 public class ProdutoController {
-  @Autowired
-  private ProdutoService produtoService;
 
-  @Autowired
-  private CategoriaProdutoService categoriaProdutoService;
+    @Autowired
+    private ProdutoService produtoService;
 
-  @PostMapping
-  public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
+    @Autowired
+    private CategoriaProdutoService categoriaProdutoService;
 
-    Produto produtoNovo = request.build();
-    produtoNovo.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
-    Produto produto = produtoService.save(produtoNovo);
-    return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
-  }
+    @PostMapping
+    public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
 
-  @GetMapping
-  public List<Produto> listarTodos() {
-    return produtoService.listarTodos();
-  }
+        Produto produtoNovo = request.build();
+        produtoNovo.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
+        Produto produto = produtoService.save(produtoNovo);
+        return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+    }
 
-  @GetMapping("/{id}")
-  public Produto obterPorID(@PathVariable Long id) {
-    return produtoService.obterPorID(id);
-  }
+    @GetMapping
+    public List<Produto> listarTodos() {
+        return produtoService.listarTodos();
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
+    @GetMapping("/{id}")
+    public Produto obterPorID(@PathVariable Long id) {
+        return produtoService.obterPorID(id);
+    }
 
-    Produto produto = request.build();
-    produto.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
-    produtoService.update(id, produto);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Produto produto = request.build();
+        produto.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
+        produtoService.update(id, produto);
+        return ResponseEntity.ok().build();
+    }
 
-    produtoService.delete(id);
-    return ResponseEntity.ok().build();
-  }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        produtoService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

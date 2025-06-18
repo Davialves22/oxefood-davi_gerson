@@ -27,20 +27,29 @@ public class ClienteService {
 
   public Cliente obterPorID(Long id) {
 
-    return repository.findById(id).get(); // select * from cliente where id = ?
+    return repository.findById(id).get(); // select * from cliente where id= ?
   }
 
   @Transactional
   public void update(Long id, Cliente clienteAlterado) {
+    Cliente cliente = repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-    Cliente cliente = repository.findById(id).get();
-
+    cliente.setEnderecos(clienteAlterado.getEnderecos());
     cliente.setNome(clienteAlterado.getNome());
     cliente.setDataNascimento(clienteAlterado.getDataNascimento());
     cliente.setCpf(clienteAlterado.getCpf());
     cliente.setFoneCelular(clienteAlterado.getFoneCelular());
     cliente.setFoneFixo(clienteAlterado.getFoneFixo());
 
+    // Atualiza endereços garantindo a referência para o cliente
+    if (clienteAlterado.getEnderecos() != null) {
+      clienteAlterado.getEnderecos().forEach(endereco -> endereco.setCliente(cliente));
+      cliente.setEnderecos(clienteAlterado.getEnderecos());
+    } else {
+      cliente.getEnderecos().clear(); // limpa os endereços se for null
+    }
+
+    cliente.setVersao(cliente.getVersao() + 1);
     repository.save(cliente);
   }
 

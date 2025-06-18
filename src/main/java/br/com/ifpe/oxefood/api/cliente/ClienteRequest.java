@@ -1,7 +1,9 @@
 package br.com.ifpe.oxefood.api.cliente;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
@@ -21,6 +23,8 @@ import org.hibernate.validator.constraints.br.CPF;
 @AllArgsConstructor
 public class ClienteRequest { // vai converter num objeto que tenha os atributos
 
+  private List<Long> idEnderecos;
+
   @NotNull(message = "O Nome é de preenchimento obrigatório")
   @NotEmpty(message = "O Nome é de preenchimento obrigatório")
   @Length(max = 100, message = "O Nome deverá ter no máximo {max} caracteres")
@@ -38,15 +42,20 @@ public class ClienteRequest { // vai converter num objeto que tenha os atributos
 
   private String foneFixo;
 
-  public Cliente build() {
+  public Cliente toEntity(List<EnderecoCliente> enderecos) {
+    Cliente cliente = Cliente.builder()
+            .nome(nome)
+            .dataNascimento(dataNascimento)
+            .cpf(cpf)
+            .foneCelular(foneCelular)
+            .foneFixo(foneFixo)
+            .build();
 
-    return Cliente.builder()
-        .nome(nome)
-        .dataNascimento(dataNascimento)
-        .cpf(cpf)
-        .foneCelular(foneCelular)
-        .foneFixo(foneFixo)
-        .build();
+    if (enderecos != null && !enderecos.isEmpty()) {
+      enderecos.forEach(e -> e.setCliente(cliente));
+      cliente.setEnderecos(enderecos);
+    }
+
+    return cliente;
   }
-
 }

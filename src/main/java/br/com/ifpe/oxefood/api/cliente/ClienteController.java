@@ -1,7 +1,10 @@
 package br.com.ifpe.oxefood.api.cliente;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
+import br.com.ifpe.oxefood.modelo.cliente.EnderecoClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,15 +30,28 @@ public class ClienteController {
   @Autowired
   private ClienteService clienteService;
 
+  @Autowired
+  private EnderecoClienteService enderecoClienteService;
+
   // função salvar
   @PostMapping
   public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
 
-    Cliente cliente = clienteService.save(request.build());
-    return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+    List<EnderecoCliente> enderecos = null;
+    if (request.getIdEnderecos() != null && !request.getIdEnderecos().isEmpty()) {
+      enderecos = request.getIdEnderecos().stream()
+              .map(enderecoClienteService::obterPorID)
+              .collect(Collectors.toList());
+    }
+
+    Cliente cliente = request.toEntity(enderecos);
+    Cliente clienteSalvo = clienteService.save(cliente);
+
+    return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
   }
 
-  @GetMapping
+
+    @GetMapping
   public List<Cliente> listarTodos() {
     return clienteService.listarTodos();
   }
@@ -46,9 +62,18 @@ public class ClienteController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Cliente> update(@PathVariable("id") Long id, @RequestBody @Valid ClienteRequest request) {
+  public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody @Valid ClienteRequest request) {
 
-    clienteService.update(id, request.build());
+    List<EnderecoCliente> enderecos = null;
+    if (request.getIdEnderecos() != null && !request.getIdEnderecos().isEmpty()) {
+      enderecos = request.getIdEnderecos().stream()
+              .map(enderecoClienteService::obterPorID)
+              .collect(Collectors.toList());
+    }
+
+    Cliente cliente = request.toEntity(enderecos);
+    clienteService.update(id, cliente);
+
     return ResponseEntity.ok().build();
   }
 
